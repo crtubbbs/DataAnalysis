@@ -78,7 +78,7 @@ Note that `IM` stands for Individual Module and `TP` stands for Team Project.
 |5/15      |10:15Am   |TP      | In class meeting                           |    1:00     |   
 |5/16      |11:30Am   |TP      | Another meeting with group                 |    1:00     |                          
 |5/16      |5:00Pm    |IM      | Started with my planning                   |    2:00     |
-|          |          |        |                                            |             |
+|5/20      |10:15Am   |TP      | In class team meeting                      |    1:00     |   
 |          |          |        |                                            |             |
 
 _Note: Add more rows as needed._

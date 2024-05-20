@@ -5,10 +5,25 @@ date: "2024-05-16"
 ---
 
 ```{r}
-x <- 12
-y<- 13
-x+y
+
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+data <- read.csv("spotify-2023.csv")
+
 ```
 
-check
+```{r}
+top_10_songs <- data %>%
+  arrange(desc(streams)) %>%
+  slice(1:10) %>%
+  select(track_name, artist_name, streams)
+
+top_10_songs
+
+```
+```{r}
+
+```
 
