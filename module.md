@@ -78,9 +78,12 @@ Note that `IM` stands for Individual Module and `TP` stands for Team Project.
 |5/15      |10:15Am   |TP      | In class meeting                           |    1:00     |   
 |5/16      |11:30Am   |TP      | Another meeting with group                 |    1:00     |                          
 |5/16      |5:00Pm    |IM      | Started with my planning                   |    2:00     |
+|5/17      |6:00Pm    |IM      | Found dataframe, played with it            |    2:00     |
 |5/20      |10:15Am   |TP      | In class team meeting                      |    1:00     |   
-|          |          |        |                                            |             |
-
+|5/20      |5:00Pm    |IM      | Looked for questions in the dataset        |    2:00     |
+|5/24       6:00Pm     IM        Began to fix code                               1:00
+|5/25       7:00Pm     IM        I can't finish in time but will work            2:00
+|5/26       3:00 Pm    IM        Finishing touches                               1:00
 _Note: Add more rows as needed._
 
 
@@ -96,11 +99,11 @@ This section should be filled out at the end of the Sprint and submitted.
 
 |Question                                                    |Response|
 |------------------------------------------------------------|--------|
-|Are the links above public and working?                     |        |
-|Did you complete all the unique requirements for the module?|        |
-|Did you write at least 100 lines of code?                   |        |
-|Did you fully complete the readme.md file?                  |        |
-|Did you put the readme.md file in GitHub in the top folder? |        |
+|Are the links above public and working?                     |   Y    |
+|Did you complete all the unique requirements for the module?|   Y    |
+|Did you write at least 100 lines of code?                   |   Y    |
+|Did you fully complete the readme.md file?                  |   Y    |
+|Did you put the readme.md file in GitHub in the top folder? |   Y    |
 
 4. If you completed a Stretch Challenge (as shown in the Module Description document in Canvas) then describe what you did.  If you did the Choose Your Own Adventure module, then you get to decide what qualifies as a Stretch Challenge.
 
@@ -110,6 +113,6 @@ This section should be filled out at the end of the Sprint and submitted.
 
 |Activity         |Total Hours:Minutes|
 |-----------------|-------------------|
-|Individual Module|                   |
+|Individual Module|      10           |
 
 7. What strategies (behavioral and technical) worked well during this Sprint?  What did not work well?  List some possible ways that you can improve next Sprint.
