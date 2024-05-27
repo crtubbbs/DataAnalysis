@@ -91,7 +91,7 @@ _Note: Add more rows as needed._
 
 This section should be filled out at the end of the Sprint and submitted.
 
-1. Put your GitHub link for your demonstration software here: 
+1. Put your GitHub link for your demonstration software here: https://github.com/crtubbbs/DataAnalysis
 
 2. Put your YouTube link for your code walkthrough and demo video here:
 
@@ -105,9 +105,10 @@ This section should be filled out at the end of the Sprint and submitted.
 |Did you fully complete the readme.md file?                  |   Y    |
 |Did you put the readme.md file in GitHub in the top folder? |   Y    |
 
-4. If you completed a Stretch Challenge (as shown in the Module Description document in Canvas) then describe what you did.  If you did the Choose Your Own Adventure module, then you get to decide what qualifies as a Stretch Challenge.
+4. If you completed a Stretch Challenge (as shown in the Module Description document in Canvas) then describe what you did.  If you did the Choose Your Own Adventure module, then you get to decide what qualifies as a Stretch Challenge. 
+Added graphs and things to show differences.
 
-5. Did you change your selected module during the middle of the Sprint?  If yes, then describe what you changed it to, when you changed it, and why you changed it.
+5. Did you change your selected module during the middle of the Sprint?  If yes, then describe what you changed it to, when you changed it, and why you changed it. no
 
 6. Using the log above, fill in the total hours and minutes you spent on the individual module:
 
@@ -116,3 +117,4 @@ This section should be filled out at the end of the Sprint and submitted.
 |Individual Module|      10           |
 
 7. What strategies (behavioral and technical) worked well during this Sprint?  What did not work well?  List some possible ways that you can improve next Sprint.
+I started off strong but burned out fast. I would like to find the balance of getting things done well in unison instead of doing most in week 1 or 2.
