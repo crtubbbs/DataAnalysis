@@ -76,9 +76,65 @@ p <- ggplot(combined_data, aes(x = position, y = streams/100000, group = type, c
 
 ggplotly(p, tooltip = "text")
 ```
+This line plot visualizes the streaming numbers of the top 10 songs in 2023 compared to the overall top 10 songs. The interactive plot allows for an in-depth comparison by showing detailed information on hover.
 
 
 
 
 
 
+
+
+
+
+Analyze and Compare Top and Next 10 Songs
+We then compare the top 10 songs with the next 10 songs in terms of streaming numbers and audio features. We use ggplot2 to create bar plots and box plots for visualization.
+
+
+```{r}
+top_10_songs <- data %>%
+  arrange(desc(streams)) %>%
+  head(10)
+
+# Filter for next 10 songs
+next_10_songs <- data %>%
+  arrange(desc(streams)) %>%
+  slice(11:20)
+
+# Combine the two datasets
+top_10_songs$type <- "Top 10"
+next_10_songs$type <- "Next 10"
+
+combined_data <- bind_rows(top_10_songs, next_10_songs)
+
+# Plot streaming numbers
+p_streams <- ggplot(combined_data, aes(x = reorder(track_name, -streams), y = streams/1000000, fill = type)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "Streaming Numbers for Top 10 and Next 10 Songs",
+       x = "Track Name",
+       y = "Number of Streams (in millions)",
+       fill = "Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot audio features
+audio_features <- combined_data %>%
+  select(track_name, type, danceability_ = danceability_., valence_ = valence_., energy_ = energy_., acousticness_ = acousticness_., instrumentalness_ = instrumentalness_., liveness_ = liveness_., speechiness_ = speechiness_.) %>%
+  gather(feature, value, -track_name, -type)
+
+p_features <- ggplot(audio_features, aes(x = feature, y = value, fill = type)) +
+  geom_boxplot() +
+  labs(title = "Audio Features Comparison for Top 10 and Next 10 Songs",
+       x = "Audio Feature",
+       y = "Value",
+       fill = "Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Convert to interactive plots
+ggplotly(p_streams)
+ggplotly(p_features)
+```
+The bar plot displays the streaming numbers for the top 10 and next 10 songs, while the box plot compares key audio features between these two groups. Both plots are converted to interactive formats for better analysis.
+
+Feedback: Roommates suggested that adding labels to the lines in the plot could help differentiate between categories more clearly. They also recommended adding explanations for why certain audio features might be relevant to streaming numbers and suggesting a comparison of audio feature distributions.

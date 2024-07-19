@@ -1,0 +1,147 @@
+---
+title: "Song Trends in 2023"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+execute:
+  keep-md: true
+  df-print: paged
+  warning: false
+format:
+  html:
+    theme: cerulean
+    code-fold: true
+    code-line-numbers: true
+editor_options: 
+  chunk_output_type: inline
+---
+
+In this analysis, we aim to explore and visualize the top songs based on their streaming numbers across different platforms. We will particularly focus on identifying the top 10 songs released in 2023 and comparing them with the overall top 10 songs by streams. This analysis is crucial for understanding trends in music popularity and how recent releases stack up against all-time hits.
+
+First, we load the necessary libraries. We use `readr` for reading the dataset, `dplyr` for data manipulation, `ggplot2` for visualization, and `plotly` for creating interactive plots.
+
+```{r include=FALSE}
+library(plotly)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(readr)
+
+data <- read.csv("spotify-2023.csv") %>%
+  mutate(
+    streams = as.numeric(streams)
+  ) %>%
+  na.omit
+
+```
+
+We filter the dataset to select the top 10 songs released in the year 2023. This helps us focus on the most popular recent releases.
+
+```{r}
+top_10_songs_released_2023 <- data %>%
+  filter(released_year == 2023) %>%
+  arrange(desc(streams)) %>%
+  head(10) %>%
+  select(track_name, artist_name, streams)
+top_10_songs_released_2023
+```
+
+Here, we select the overall top 10 songs by their number of streams. This gives us an insight into the most popular songs regardless of their release year.
+
+```{r}
+top_10_songs_2023 <- data %>%
+  arrange(desc(streams)) %>%
+  head(10) %>%
+  select(track_name, released_year, artist_name, streams)
+top_10_songs_2023
+```
+
+We combine the two datasets—top 10 songs released in 2023 and overall top 10 songs. This allows us to compare the two sets of songs in a single visualization. We use ggplot2 to create a base plot and then convert it to an interactive plot using plotly. The plot shows the top 10 songs by streams, distinguishing between songs released in 2023 and the overall top 10 songs. Hovering over a point displays the song name and artist name.
+
+```{r}
+top_10_songs_released_2023$type <- "Released in 2023"
+top_10_songs_2023$type <- "Top 10 Overall"
+
+
+combined_data <- bind_rows(top_10_songs_released_2023, top_10_songs_2023)
+
+combined_data <- combined_data %>%
+  group_by(type) %>%
+  mutate(position = row_number())
+
+p <- ggplot(combined_data, aes(x = position, y = streams/100000, group = type, color = type, linetype = type, text = paste("Track Name:", track_name, "<br>Artist:", artist_name))) +
+  geom_line(size = 1.5) +
+  geom_point(size = 3) +
+  scale_x_continuous() +
+  labs(title = "Top 10 Songs by Streams",
+       x = "Track Position",
+       y = "Number of Streams",
+       color = "Category",
+       linetype = "Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom")
+
+
+ggplotly(p, tooltip = "text")
+
+```
+
+```{r}
+
+data <- read.csv("spotify-2023.csv", encoding = "latin1") %>%
+  mutate(streams = as.numeric(gsub(",", "", streams))) %>%
+  na.omit()
+```
+
+```{r}
+# Filter for top 10 songs
+top_10_songs <- data %>%
+  arrange(desc(streams)) %>%
+  head(10)
+
+# Filter for next 10 songs
+next_10_songs <- data %>%
+  arrange(desc(streams)) %>%
+  slice(11:20)
+
+# Combine the two datasets
+top_10_songs$type <- "Top 10"
+next_10_songs$type <- "Next 10"
+
+combined_data <- bind_rows(top_10_songs, next_10_songs)
+```
+
+```{r}
+p_streams <- ggplot(combined_data, aes(x = reorder(track_name, -streams), y = streams/1000000, fill = type)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "Streaming Numbers for Top 10 and Next 10 Songs",
+       x = "Track Name",
+       y = "Number of Streams (in millions)",
+       fill = "Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+audio_features <- combined_data %>%
+  select(track_name, type, danceability_ = danceability_., valence_ = valence_., energy_ = energy_., acousticness_ = acousticness_., instrumentalness_ = instrumentalness_., liveness_ = liveness_., speechiness_ = speechiness_.) %>%
+  gather(feature, value, -track_name, -type)
+```
+
+```{r}
+p_features <- ggplot(audio_features, aes(x = feature, y = value, fill = type)) +
+  geom_boxplot() +
+  labs(title = "Audio Features Comparison for Top 10 and Next 10 Songs",
+       x = "Audio Feature",
+       y = "Value",
+       fill = "Category") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Convert to interactive plots
+ggplotly(p_streams)
+
+```
+
+```{r}
+ggplotly(p_features)
+```
